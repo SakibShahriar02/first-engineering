@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export default function App() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -10,6 +10,55 @@ export default function App() {
   const [area, setArea] = useState("");
   const [message, setMessage] = useState("");
   const [formStatus, setFormStatus] = useState("");
+  const [view, setView] = useState<"home" | "businesses">("home");
+  const [bizOpen, setBizOpen] = useState(false);
+  const [mobileBizOpen, setMobileBizOpen] = useState(false);
+  const bizRef = useRef<HTMLDivElement | null>(null);
+
+  function goHome(section?: string) {
+    setView("home");
+    setBizOpen(false);
+    setMobileBizOpen(false);
+    setMenuOpen(false);
+    window.setTimeout(() => {
+      if (section) {
+        document.getElementById(section)?.scrollIntoView({ behavior: "smooth" });
+      } else {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+    }, 0);
+  }
+
+  function goBusinesses(focus: "all" | "alpha" | "first") {
+    setView("businesses");
+    setBizOpen(false);
+    setMobileBizOpen(false);
+    setMenuOpen(false);
+    window.setTimeout(() => {
+      if (focus === "alpha") {
+        document.getElementById("business-alpha")?.scrollIntoView({ behavior: "smooth" });
+      } else if (focus === "first") {
+        document.getElementById("business-first")?.scrollIntoView({ behavior: "smooth" });
+      } else {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+    }, 0);
+  }
+
+  useEffect(() => {
+    function onDocClick(e: MouseEvent) {
+      if (bizRef.current && !bizRef.current.contains(e.target as Node)) setBizOpen(false);
+    }
+    function onKey(e: KeyboardEvent) {
+      if (e.key === "Escape") { setBizOpen(false); setMobileBizOpen(false); }
+    }
+    document.addEventListener("mousedown", onDocClick);
+    document.addEventListener("keydown", onKey);
+    return () => {
+      document.removeEventListener("mousedown", onDocClick);
+      document.removeEventListener("keydown", onKey);
+    };
+  }, []);
 
   function handleCopy(text: string) {
     const done = () => {
@@ -77,7 +126,7 @@ export default function App() {
     <>
     <header className="nav">
       <div className="wrap nav-in">
-        <a className="brand" href="#top" aria-label="First Engineering — home">
+        <a className="brand" href="#top" aria-label="First Engineering — home" onClick={(e) => { e.preventDefault(); goHome(); }}>
           <span className="mark" aria-hidden="true">F<em>E</em></span>
           <span className="brand-text">
             <strong>First Engineering</strong>
@@ -85,28 +134,85 @@ export default function App() {
           </span>
         </a>
         <nav className="nav-links" aria-label="Main">
-          <a href="#about">About</a>
-          <a href="#services">Services</a>
-          <a href="#work">Spaces</a>
-          <a href="#process">Process</a>
-          <a href="#faq">FAQ</a>
+          <a href="#about" onClick={(e) => { e.preventDefault(); goHome("about"); }}>About</a>
+          <a href="#services" onClick={(e) => { e.preventDefault(); goHome("services"); }}>Services</a>
+          <a href="#work" onClick={(e) => { e.preventDefault(); goHome("work"); }}>Spaces</a>
+          <a href="#process" onClick={(e) => { e.preventDefault(); goHome("process"); }}>Process</a>
+          <a href="#faq" onClick={(e) => { e.preventDefault(); goHome("faq"); }}>FAQ</a>
+          <div className="biz-dropdown" ref={bizRef}>
+            <button className="biz-drop-btn" type="button" aria-haspopup="true" aria-expanded={bizOpen} onClick={() => setBizOpen((v) => !v)}>
+              Businesses <span aria-hidden="true">▾</span>
+            </button>
+            {bizOpen && (
+              <div className="biz-menu" role="menu" aria-label="Businesses">
+                <button type="button" role="menuitem" onClick={() => goBusinesses("all")}>All Businesses</button>
+                <button type="button" role="menuitem" onClick={() => goBusinesses("alpha")}>Alpha Interior &amp; Furniture</button>
+                <button type="button" role="menuitem" onClick={() => goHome("services")}>First Engineering — Architecture &amp; Structure</button>
+              </div>
+            )}
+          </div>
           <a className="btn btn-blue btn-sm" href="tel:+8801673630006">Call +880 1673-630006</a>
         </nav>
         <button className="menu-btn" id="menuBtn" aria-expanded={menuOpen} aria-controls="mobileMenu" aria-label={menuOpen ? "Close menu" : "Open menu"} onClick={() => setMenuOpen((v) => !v)}>
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
         </button>
       </div>
-      <div className={`wrap mobile-menu${menuOpen ? " open" : ""}`} id="mobileMenu" onClick={() => setMenuOpen(false)}>
-        <a href="#about">About</a>
-        <a href="#services">Services</a>
-        <a href="#work">Spaces</a>
-        <a href="#process">Process</a>
-        <a href="#faq">FAQ</a>
-        <a href="#contact">Contact</a>
+      <div className={`wrap mobile-menu${menuOpen ? " open" : ""}`} id="mobileMenu">
+        <a href="#about" onClick={(e) => { e.preventDefault(); goHome("about"); }}>About</a>
+        <a href="#services" onClick={(e) => { e.preventDefault(); goHome("services"); }}>Services</a>
+        <a href="#work" onClick={(e) => { e.preventDefault(); goHome("work"); }}>Spaces</a>
+        <a href="#process" onClick={(e) => { e.preventDefault(); goHome("process"); }}>Process</a>
+        <a href="#faq" onClick={(e) => { e.preventDefault(); goHome("faq"); }}>FAQ</a>
+        <button className="biz-accordion-btn" type="button" aria-expanded={mobileBizOpen} onClick={() => setMobileBizOpen((v) => !v)}>
+          Businesses <span aria-hidden="true">▾</span>
+        </button>
+        {mobileBizOpen && (
+          <div className="biz-accordion">
+            <button type="button" onClick={() => goBusinesses("all")}>All Businesses</button>
+            <button type="button" onClick={() => goBusinesses("alpha")}>Alpha Interior &amp; Furniture</button>
+            <button type="button" onClick={() => goHome("services")}>First Engineering — Architecture &amp; Structure</button>
+          </div>
+        )}
+        <a href="#contact" onClick={(e) => { e.preventDefault(); goHome("contact"); }}>Contact</a>
       </div>
     </header>
 
     <main id="top">
+      {view === "businesses" ? (
+      <section id="businesses">
+        <div className="wrap">
+          <div className="sec-head">
+            <p className="kicker">Our Businesses</p>
+            <h2>One parent, focused businesses</h2>
+            <p>First Engineering Architecture &amp; Interior Solutions is the parent business. Alpha Interior &amp; Furniture is its initiative and interior concern — part of the same team, focused on interiors and furniture.</p>
+          </div>
+          <div className="svc-grid">
+            <article className="svc" id="business-first">
+              <p className="kicker">Parent business</p>
+              <h3>First Engineering Architecture &amp; Interior Solutions</h3>
+              <p>Architecture and structural design, plus the studio&apos;s overall services — residential building design, structural engineering, space planning and complete interiors, from first sketch to finished room.</p>
+              <ul><li>Residential building design</li><li>Structural engineering</li><li>Space planning &amp; layouts</li><li>Complete interiors</li></ul>
+              <div className="biz-card-links">
+                <a className="btn btn-blue btn-sm" href="https://www.facebook.com/firstengineeringsolutions" target="_blank" rel="noopener">Facebook page</a>
+                <a className="btn btn-ghost btn-sm" href="#services" onClick={(e) => { e.preventDefault(); goHome("services"); }}>View services</a>
+              </div>
+            </article>
+            <article className="svc" id="business-alpha">
+              <p className="kicker">A concern of First Engineering</p>
+              <h3>Alpha Interior &amp; Furniture</h3>
+              <p>Interior design, planning, furniture and execution for homes, offices, showrooms and restaurants — furniture planned with the room, then built and executed on site until handover.</p>
+              <ul><li>Home interiors</li><li>Office interiors</li><li>Showroom &amp; restaurant interiors</li><li>Custom furniture &amp; execution</li></ul>
+              <div className="biz-card-links">
+                <a className="btn btn-blue btn-sm" href="https://www.facebook.com/people/Alpha-Interior/100088429072640/" target="_blank" rel="noopener">Facebook page</a>
+                <a className="btn btn-ghost btn-sm" href="#contact" onClick={(e) => { e.preventDefault(); goHome("contact"); }}>Contact the studio</a>
+              </div>
+            </article>
+          </div>
+          <p className="biz-note">More businesses will be added here as cards as they are launched. No other businesses are listed yet — this page will grow as a card for each one.</p>
+        </div>
+      </section>
+      ) : (
+      <>
 
 
       <div className="hero">
@@ -403,12 +509,14 @@ export default function App() {
           </div>
         </div>
       </section>
+      </> )}
     </main>
 
     <footer>
       <div className="wrap foot-in">
         <span>© 2026 First Engineering Architecture &amp; Interior Solutions · Alpha Interior — a concern of First Engineering</span>
         <span style={{display: 'flex', gap: '22px', flexWrap: 'wrap'}}>
+          <a href="#businesses" onClick={(e) => { e.preventDefault(); goBusinesses("all"); }}>Businesses</a>
           <a href="https://www.facebook.com/firstengineeringsolutions" target="_blank" rel="noopener">Facebook</a>
           <a href="tel:+8801673630006">+880 1673-630006</a>
           <a href="mailto:fastengineering08@gmail.com">Email us</a>
