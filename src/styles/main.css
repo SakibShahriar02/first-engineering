@@ -220,3 +220,21 @@ footer a:hover{text-decoration:underline}
 
 /* ---------- Alpha page links (reused by the Alpha contact section) ---------- */
 .biz-card-links{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
+
+/* ---------- Draft Alpha identity (Alpha view only) ---------- */
+.alpha-page .alpha-draft-notice{background:var(--wood-soft);border:1px solid var(--wood);color:var(--ink);font-weight:800;font-size:14px;padding:13px 18px;border-radius:12px;margin:22px auto 0}
+.alpha-page .alpha-hero{background:linear-gradient(180deg,var(--wood-soft),transparent);border-bottom:1px solid var(--line)}
+.alpha-page .alpha-hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:44px;align-items:center;padding:34px 0 54px}
+@media(max-width:900px){.alpha-page .alpha-hero-grid{grid-template-columns:1fr;gap:28px}}
+.alpha-page .alpha-hero h1{font-size:clamp(36px,5.2vw,58px);font-weight:900;margin:16px 0 6px}
+.alpha-page .alpha-hero .lede{font-size:17.5px;color:var(--ink2);margin:16px 0 0;max-width:34em}
+.alpha-page .alpha-relationship{font-weight:800;color:var(--wood-dark);margin:18px 0 0}
+.alpha-page .alpha-hero-photo img{width:100%;border-radius:22px;box-shadow:var(--shadow);aspect-ratio:4/3.1;object-fit:cover}
+.alpha-page .kicker{color:var(--wood-dark)}
+.alpha-page .alpha-draft-label{font-size:13.5px;color:var(--muted);font-weight:700}
+.alpha-page .alpha-ideas .svc{border-top:4px solid var(--wood)}
+.alpha-page .alpha-craft .step .num{color:var(--wood-soft);-webkit-text-stroke:1.5px var(--wood-dark)}
+.alpha-page .alpha-craft-grid{grid-template-columns:repeat(3,1fr)}
+@media(max-width:950px){.alpha-page .alpha-craft-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:520px){.alpha-page .alpha-craft-grid{grid-template-columns:1fr}}
+.alpha-page .alpha-contact{background:var(--wood-soft);border-top:1px solid var(--line)}

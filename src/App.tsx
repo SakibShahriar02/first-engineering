@@ -131,129 +131,138 @@ export default function App() {
 
     <main id="top">
       {view === "alpha" ? (
-      <>
-      <section id="alpha">
-        <div className="wrap">
-          <div className="sec-head">
-            <p className="kicker">Our business</p>
-            <h2>Alpha Interior &amp; Furniture</h2>
-            <p>A concern of First Engineering Architecture &amp; Interior Solutions</p>
+      <div className="alpha-page">
+      <div className="alpha-draft-notice" role="note">Draft Alpha identity for review. Photos are style examples and copy is proposed — replace with Alpha&apos;s real projects and details.</div>
+
+      <section className="alpha-hero">
+        <div className="wrap alpha-hero-grid">
+          <div>
+            <p className="kicker">Alpha Interior &amp; Furniture</p>
+            <h1>Interiors shaped around the furniture you live with.</h1>
+            <p className="lede">Start with the table you gather at, the bed you rest in, the counter you work behind. Alpha designs the pieces first, then shapes the room around them — so a home or a workplace feels made for you, not fitted afterwards.</p>
+            <p className="alpha-relationship">A concern of First Engineering Architecture &amp; Interior Solutions — Alpha is the interior arm, not a separate company.</p>
+            <div className="hero-cta">
+              <a className="btn btn-wood" href="#alpha-contact" onClick={(e) => { e.preventDefault(); document.getElementById("alpha-contact")?.scrollIntoView({ behavior: "smooth" }); }}>Talk to Alpha about your room</a>
+              <a className="btn btn-ghost" href="https://www.facebook.com/people/Alpha-Interior/100088429072640/" target="_blank" rel="noopener">Facebook — Alpha Interior</a>
+            </div>
           </div>
-          <p>Alpha Interior is the interior arm of First Engineering — a complete interior solution covering design, planning, furniture and execution for your home, office, showroom, restaurant or other commercial space.</p>
-          <p className="bn" style={{fontWeight: '600', color: 'var(--wood-dark)'}}>আপনার ভাবনাকে বাস্তব রূপ দিতে শুরু হোক আজই। <span style={{color: 'var(--muted)', fontWeight: '500'}}>— Start today to give your idea real form.</span></p>
-          <ul className="checklist">
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"><path d="M20 6 9 17l-5-5"/></svg> One point of contact, start to finish</li>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Furniture planned with the room, not after it</li>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Site visits and supervised execution</li>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Homes and businesses, across Bangladesh</li>
-          </ul>
+          <div className="alpha-hero-photo">
+            <img src="/images/image-03.png" alt="Apartment living room with grey sofa, marble flooring and wood-panelled walls" />
+            <p className="gal-note">Style example — not an Alpha project photo.</p>
+          </div>
         </div>
       </section>
 
-      <section id="alpha-services">
+      <section className="alpha-story">
         <div className="wrap">
           <div className="sec-head">
-            <p className="kicker">What Alpha does</p>
-            <h2>Design, planning, furniture and execution — in one place</h2>
+            <p className="kicker">The Alpha point of view — draft</p>
+            <h2>Don&apos;t squeeze furniture into a finished room.</h2>
+          </div>
+          <p>Most rooms are finished first and furniture is squeezed in afterwards. Alpha turns that around: measure how you actually live and work, design the pieces for that life, then plan the walls, light, storage and finishes around them. The result should feel warm, practical and calm on an ordinary Tuesday — not just on the day it is photographed.</p>
+          <p className="bn" style={{fontWeight: '600', color: 'var(--wood-dark)'}}>আপনার ভাবনাকে বাস্তব রূপ দিতে শুরু হোক আজই। <span style={{color: 'var(--muted)', fontWeight: '500'}}>— Start today to give your idea real form.</span></p>
+          <p className="alpha-draft-label">Draft wording for review — Alpha&apos;s own story to be confirmed and replaced with its real voice.</p>
+        </div>
+      </section>
+
+      <section className="alpha-ideas">
+        <div className="wrap">
+          <div className="sec-head">
+            <p className="kicker">Signature ideas — draft</p>
+            <h2>Four ideas Alpha could be known for</h2>
+            <p>Draft ideas for review — keep, change, or drop any of these. They are proposed concepts, not Alpha&apos;s confirmed catalogue.</p>
           </div>
           <div className="svc-grid">
             <article className="svc">
-              <h3>Interior Design</h3>
-              <p>Complete interiors for flats and houses — living rooms, bedrooms and kitchens designed around your family and your daily life — as well as offices, showrooms and restaurants.</p>
-              <ul><li>Living &amp; dining spaces</li><li>Bedrooms &amp; kitchens</li><li>Full-flat interior packages</li></ul>
+              <h3>Plan the furniture first</h3>
+              <p>Seating, storage, beds and counters are planned before finishes are chosen, so nothing important has to be squeezed in later.</p>
             </article>
             <article className="svc">
-              <h3>Planning</h3>
-              <p>We prepare the design and layout plan for your rooms — how the space is divided, where everything goes, and how it will look and feel.</p>
-              <ul><li>Space planning &amp; layouts</li><li>Workstations &amp; cabins</li><li>Meeting &amp; reception areas</li></ul>
+              <h3>Pieces made for the exact plan</h3>
+              <p>Custom pieces sized for your room and your routine, instead of standard pieces adapted to fit.</p>
             </article>
             <article className="svc">
-              <h3>Custom Furniture</h3>
-              <p>Through Alpha Interior and Furniture, furniture is designed and made for your exact plan — furniture planned with the room, not after it.</p>
-              <ul><li>Custom furniture by Alpha Interior</li><li>Furniture matched with finishes and materials</li></ul>
+              <h3>Warm, durable finishes</h3>
+              <p>Wood, texture and finishes chosen for daily use — homes that are lived in, offices that are worked in, and counters that are used all day.</p>
             </article>
             <article className="svc">
-              <h3>Fit-out &amp; Execution</h3>
-              <p>Our team executes the work on site under supervision, finishing the details and handing over a space that&apos;s ready to use.</p>
-              <ul><li>Fit-out &amp; finishing work</li><li>On-site supervision</li><li>Execution &amp; handover</li></ul>
+              <h3>Fitted, then handed over ready</h3>
+              <p>Fit-out supervised on site, so the room you are handed over is the room you can use straight away.</p>
             </article>
           </div>
         </div>
       </section>
 
-      <section id="alpha-spaces">
+      <section className="alpha-spaces">
         <div className="wrap">
           <div className="sec-head">
-            <p className="kicker">Spaces Alpha designs</p>
-            <h2>Rooms that work as good as they look</h2>
-            <p>The photos are style examples of the spaces we design.</p>
+            <p className="kicker">Alpha spaces — draft</p>
+            <h2>Rooms, read through their furniture</h2>
+            <p>All photos are style examples, shown here to test Alpha&apos;s furniture-led framing — not Alpha project photos.</p>
           </div>
           <div className="gal">
             <figure>
               <img src="/images/image-03.png" alt="Apartment living room with grey sofa, marble flooring and wood-panelled walls" loading="lazy" />
-              <figcaption><b>Living Room</b><span>Home interior · style example</span></figcaption>
-            </figure>
-            <figure>
-              <img src="/images/image-04.jpg" alt="Bedroom interior with a statement ceiling light, marble feature wall and vanity" loading="lazy" />
-              <figcaption><b>Master Bedroom</b><span>Home interior · style example</span></figcaption>
+              <figcaption><b>Living, built around its seating</b><span>Sofa, storage and light planned together · style example</span></figcaption>
             </figure>
             <figure>
               <img src="/images/image-05.jpg" alt="Bright modern kitchen with a central island and pendant lights" loading="lazy" />
-              <figcaption><b>Kitchen</b><span>Home interior · style example</span></figcaption>
-            </figure>
-            <figure>
-              <img src="/images/image-06.jpg" alt="Open-plan office with wooden desks, exposed ceiling and stone feature walls" loading="lazy" />
-              <figcaption><b>Open-Plan Office</b><span>Office interior · style example</span></figcaption>
+              <figcaption><b>Kitchen, designed as one piece</b><span>Counter, storage and island together · style example</span></figcaption>
             </figure>
             <figure>
               <img src="/images/image-08.jpg" alt="Warmly lit restaurant interior with wooden tables, pendant lamps and a long counter" loading="lazy" />
-              <figcaption><b>Restaurant Dining</b><span>Commercial interior · style example</span></figcaption>
+              <figcaption><b>Dining, made for busy evenings</b><span>Tables, counter and light for service · style example</span></figcaption>
+            </figure>
+            <figure>
+              <img src="/images/image-06.jpg" alt="Open-plan office with wooden desks, exposed ceiling and stone feature walls" loading="lazy" />
+              <figcaption><b>Work, around shared tables</b><span>Workstations planned as a team space · style example</span></figcaption>
+            </figure>
+            <figure>
+              <img src="/images/image-04.jpg" alt="Bedroom interior with a statement ceiling light, marble feature wall and vanity" loading="lazy" />
+              <figcaption><b>Rest, as one calm set</b><span>Bed, wardrobe and vanity planned together · style example</span></figcaption>
             </figure>
             <figure>
               <img src="/images/image-10.webp" alt="Bright retail showroom interior with display shelving and a seating area" loading="lazy" />
-              <figcaption><b>Retail Showroom</b><span>Commercial interior · style example</span></figcaption>
+              <figcaption><b>Display, with room for people</b><span>Shelving and seating planned together · style example</span></figcaption>
             </figure>
           </div>
-          <p className="gal-note">Photos above are style examples of the spaces we design. See the studio&apos;s own projects, site visits and finished rooms on <a href="https://www.facebook.com/people/Alpha-Interior/100088429072640/" target="_blank" rel="noopener" style={{fontWeight: '800', color: 'var(--blue)'}}>Facebook — Alpha Interior</a>.</p>
         </div>
       </section>
 
-      <section id="alpha-process">
+      <section className="alpha-craft">
         <div className="wrap">
           <div className="sec-head">
-            <p className="kicker">How it works</p>
-            <h2>From your idea to a finished space, in four steps</h2>
+            <p className="kicker">The Alpha craft — draft</p>
+            <h2>Design. Make. Fit.</h2>
+            <p>A shorter, craft-led process for Alpha, distinct from the home page&apos;s architecture process. Draft wording for review.</p>
           </div>
-          <div className="process-grid">
-            <div className="step"><div className="num">01</div><h3>Talk &amp; site visit</h3><p>Call or message us with your space and what you need. We discuss your requirements and visit the site to measure and understand it.</p></div>
-            <div className="step"><div className="num">02</div><h3>Design &amp; planning</h3><p>We prepare the design and layout plan for your rooms — how the space is divided, where everything goes, and how it will look and feel.</p></div>
-            <div className="step"><div className="num">03</div><h3>Furniture &amp; materials</h3><p>Alpha Interior and Furniture builds the pieces your plan calls for, matched with the finishes and materials chosen in the design.</p></div>
-            <div className="step"><div className="num">04</div><h3>Execution &amp; handover</h3><p>Our team executes the work on site under supervision, finishing the details and handing over a space that&apos;s ready to use.</p></div>
+          <div className="process-grid alpha-craft-grid">
+            <div className="step"><div className="num">01</div><h3>Design</h3><p>Measure how you live and work, then sketch the room and its furniture together — not one after the other.</p></div>
+            <div className="step"><div className="num">02</div><h3>Make</h3><p>Custom pieces built for your exact plan, with finishes chosen for daily use.</p></div>
+            <div className="step"><div className="num">03</div><h3>Fit</h3><p>Fit-out on site, supervised, and handed over ready to live or work in.</p></div>
           </div>
         </div>
       </section>
 
-      <section id="alpha-contact">
+      <section id="alpha-contact" className="alpha-contact">
         <div className="wrap">
           <div className="sec-head">
-            <p className="kicker">Contact Alpha</p>
-            <h2>Let&apos;s talk about your space</h2>
-            <p>One call is enough to start. Tell us whether it&apos;s a home, an office, a showroom or a restaurant — and what you&apos;d like it to become.</p>
+            <p className="kicker">Talk to Alpha — draft</p>
+            <h2>Start with the room you use most</h2>
+            <p>Tell us which room, and what you do in it every day. That is where an Alpha conversation starts.</p>
           </div>
-          <p>Call us — always open: <a href="tel:+8801673630006" style={{fontWeight: '800', color: 'var(--blue)'}}>+880 1673-630006</a></p>
-          <p>Email: <a href="mailto:fastengineering08@gmail.com" style={{fontWeight: '800', color: 'var(--blue)'}}>fastengineering08@gmail.com</a></p>
+          <p>Call us — always open: <a href="tel:+8801673630006" style={{fontWeight: '800', color: 'var(--wood-dark)'}}>+880 1673-630006</a></p>
+          <p>Email: <a href="mailto:fastengineering08@gmail.com" style={{fontWeight: '800', color: 'var(--wood-dark)'}}>fastengineering08@gmail.com</a></p>
           <p>Studio: <b>House 29, Flat F1, Katasur</b>, Mohammadpur, Dhaka-1207, Bangladesh</p>
           <div className="biz-card-links">
-            <a className="btn btn-blue btn-sm" href="https://www.facebook.com/people/Alpha-Interior/100088429072640/" target="_blank" rel="noopener">Facebook — Alpha Interior</a>
+            <a className="btn btn-wood btn-sm" href="https://www.facebook.com/people/Alpha-Interior/100088429072640/" target="_blank" rel="noopener">Facebook — Alpha Interior</a>
             <a className="btn btn-ghost btn-sm" href="tel:+8801673630006">Call 01673-630006</a>
             <a className="btn btn-ghost btn-sm" href="#contact" onClick={(e) => { e.preventDefault(); goHome("contact"); }}>Request a consultation</a>
-          </div>
-          <div className="biz-card-links" style={{marginTop: '12px'}}>
             <a className="btn btn-ghost btn-sm" href="#top" onClick={(e) => { e.preventDefault(); goHome(); }}>← Back to First Engineering home</a>
           </div>
         </div>
       </section>
-      </>
+      </div>
       ) : (
       <>
 
