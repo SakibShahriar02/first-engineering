@@ -1,5 +1,6 @@
 import Hero from "../components/sections/Hero";
 import Strip from "../components/sections/Strip";
+import ProjectsCarousel from "../components/sections/ProjectsCarousel";
 import About from "../components/sections/About";
 import Services from "../components/sections/Services";
 import Gallery from "../components/sections/Gallery";
@@ -12,6 +13,7 @@ export default function HomePage() {
     <>
       <Hero />
       <Strip />
+      <ProjectsCarousel />
       <About />
       <Services />
       <Gallery />
