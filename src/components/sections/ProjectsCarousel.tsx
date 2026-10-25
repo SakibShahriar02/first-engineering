@@ -15,11 +15,11 @@ import { contact, galleryItems } from "../../data/site";
  * Replace galleryItems entries with real project photos when they are
  * supplied.
  *
- * Auto-advance behaviour (documented): advances every 5 seconds.
+ * Auto-advance behaviour (documented): advances every 2 seconds.
  * There is NO Pause/Resume button, as requested. Auto-advance is
  * paused while the carousel is hovered or focused — that, plus the
  * arrows, dots, keyboard arrows, and swipe, is the remaining control
- * set. A manual arrow/dot/swipe move restarts the 5-second timer
+ * set. A manual arrow/dot/swipe move restarts the 2-second timer
  * cleanly (it does not stack timers and does not fight manual
  * navigation).
  */
@@ -46,7 +46,7 @@ export default function ProjectsCarousel() {
     if (paused || slides.length <= 1) return undefined;
     const timer = window.setInterval(() => {
       setIndex((current) => (current + 1) % slides.length);
-    }, 5000);
+    }, 2000);
     return () => window.clearInterval(timer);
     // Restart the timer after any manual move (manualTick) or slide change.
   }, [paused, slides.length, index, manualTick]);
