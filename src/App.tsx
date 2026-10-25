@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 
 export default function App() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -10,15 +10,10 @@ export default function App() {
   const [area, setArea] = useState("");
   const [message, setMessage] = useState("");
   const [formStatus, setFormStatus] = useState("");
-  const [view, setView] = useState<"home" | "businesses">("home");
-  const [bizOpen, setBizOpen] = useState(false);
-  const [mobileBizOpen, setMobileBizOpen] = useState(false);
-  const bizRef = useRef<HTMLDivElement | null>(null);
+  const [view, setView] = useState<"home" | "alpha">("home");
 
   function goHome(section?: string) {
     setView("home");
-    setBizOpen(false);
-    setMobileBizOpen(false);
     setMenuOpen(false);
     window.setTimeout(() => {
       if (section) {
@@ -29,36 +24,13 @@ export default function App() {
     }, 0);
   }
 
-  function goBusinesses(focus: "all" | "alpha" | "first") {
-    setView("businesses");
-    setBizOpen(false);
-    setMobileBizOpen(false);
+  function goAlpha() {
+    setView("alpha");
     setMenuOpen(false);
     window.setTimeout(() => {
-      if (focus === "alpha") {
-        document.getElementById("business-alpha")?.scrollIntoView({ behavior: "smooth" });
-      } else if (focus === "first") {
-        document.getElementById("business-first")?.scrollIntoView({ behavior: "smooth" });
-      } else {
-        window.scrollTo({ top: 0, behavior: "smooth" });
-      }
+      window.scrollTo({ top: 0, behavior: "smooth" });
     }, 0);
   }
-
-  useEffect(() => {
-    function onDocClick(e: MouseEvent) {
-      if (bizRef.current && !bizRef.current.contains(e.target as Node)) setBizOpen(false);
-    }
-    function onKey(e: KeyboardEvent) {
-      if (e.key === "Escape") { setBizOpen(false); setMobileBizOpen(false); }
-    }
-    document.addEventListener("mousedown", onDocClick);
-    document.addEventListener("keydown", onKey);
-    return () => {
-      document.removeEventListener("mousedown", onDocClick);
-      document.removeEventListener("keydown", onKey);
-    };
-  }, []);
 
   function handleCopy(text: string) {
     const done = () => {
@@ -139,18 +111,7 @@ export default function App() {
           <a href="#work" onClick={(e) => { e.preventDefault(); goHome("work"); }}>Spaces</a>
           <a href="#process" onClick={(e) => { e.preventDefault(); goHome("process"); }}>Process</a>
           <a href="#faq" onClick={(e) => { e.preventDefault(); goHome("faq"); }}>FAQ</a>
-          <div className="biz-dropdown" ref={bizRef}>
-            <button className="biz-drop-btn" type="button" aria-haspopup="true" aria-expanded={bizOpen} onClick={() => setBizOpen((v) => !v)}>
-              Businesses <span aria-hidden="true">▾</span>
-            </button>
-            {bizOpen && (
-              <div className="biz-menu" role="menu" aria-label="Businesses">
-                <button type="button" role="menuitem" onClick={() => goBusinesses("all")}>All Businesses</button>
-                <button type="button" role="menuitem" onClick={() => goBusinesses("alpha")}>Alpha Interior &amp; Furniture</button>
-                <button type="button" role="menuitem" onClick={() => goHome("services")}>First Engineering — Architecture &amp; Structure</button>
-              </div>
-            )}
-          </div>
+          <a href="#alpha" onClick={(e) => { e.preventDefault(); goAlpha(); }}>Businesses</a>
           <a className="btn btn-blue btn-sm" href="tel:+8801673630006">Call +880 1673-630006</a>
         </nav>
         <button className="menu-btn" id="menuBtn" aria-expanded={menuOpen} aria-controls="mobileMenu" aria-label={menuOpen ? "Close menu" : "Open menu"} onClick={() => setMenuOpen((v) => !v)}>
@@ -163,54 +124,136 @@ export default function App() {
         <a href="#work" onClick={(e) => { e.preventDefault(); goHome("work"); }}>Spaces</a>
         <a href="#process" onClick={(e) => { e.preventDefault(); goHome("process"); }}>Process</a>
         <a href="#faq" onClick={(e) => { e.preventDefault(); goHome("faq"); }}>FAQ</a>
-        <button className="biz-accordion-btn" type="button" aria-expanded={mobileBizOpen} onClick={() => setMobileBizOpen((v) => !v)}>
-          Businesses <span aria-hidden="true">▾</span>
-        </button>
-        {mobileBizOpen && (
-          <div className="biz-accordion">
-            <button type="button" onClick={() => goBusinesses("all")}>All Businesses</button>
-            <button type="button" onClick={() => goBusinesses("alpha")}>Alpha Interior &amp; Furniture</button>
-            <button type="button" onClick={() => goHome("services")}>First Engineering — Architecture &amp; Structure</button>
-          </div>
-        )}
+        <a href="#alpha" onClick={(e) => { e.preventDefault(); goAlpha(); }}>Businesses</a>
         <a href="#contact" onClick={(e) => { e.preventDefault(); goHome("contact"); }}>Contact</a>
       </div>
     </header>
 
     <main id="top">
-      {view === "businesses" ? (
-      <section id="businesses">
+      {view === "alpha" ? (
+      <>
+      <section id="alpha">
         <div className="wrap">
           <div className="sec-head">
-            <p className="kicker">Our Businesses</p>
-            <h2>One parent, focused businesses</h2>
-            <p>First Engineering Architecture &amp; Interior Solutions is the parent business. Alpha Interior &amp; Furniture is its initiative and interior concern — part of the same team, focused on interiors and furniture.</p>
+            <p className="kicker">Our business</p>
+            <h2>Alpha Interior &amp; Furniture</h2>
+            <p>A concern of First Engineering Architecture &amp; Interior Solutions</p>
           </div>
-          <div className="svc-grid">
-            <article className="svc" id="business-first">
-              <p className="kicker">Parent business</p>
-              <h3>First Engineering Architecture &amp; Interior Solutions</h3>
-              <p>Architecture and structural design, plus the studio&apos;s overall services — residential building design, structural engineering, space planning and complete interiors, from first sketch to finished room.</p>
-              <ul><li>Residential building design</li><li>Structural engineering</li><li>Space planning &amp; layouts</li><li>Complete interiors</li></ul>
-              <div className="biz-card-links">
-                <a className="btn btn-blue btn-sm" href="https://www.facebook.com/firstengineeringsolutions" target="_blank" rel="noopener">Facebook page</a>
-                <a className="btn btn-ghost btn-sm" href="#services" onClick={(e) => { e.preventDefault(); goHome("services"); }}>View services</a>
-              </div>
-            </article>
-            <article className="svc" id="business-alpha">
-              <p className="kicker">A concern of First Engineering</p>
-              <h3>Alpha Interior &amp; Furniture</h3>
-              <p>Interior design, planning, furniture and execution for homes, offices, showrooms and restaurants — furniture planned with the room, then built and executed on site until handover.</p>
-              <ul><li>Home interiors</li><li>Office interiors</li><li>Showroom &amp; restaurant interiors</li><li>Custom furniture &amp; execution</li></ul>
-              <div className="biz-card-links">
-                <a className="btn btn-blue btn-sm" href="https://www.facebook.com/people/Alpha-Interior/100088429072640/" target="_blank" rel="noopener">Facebook page</a>
-                <a className="btn btn-ghost btn-sm" href="#contact" onClick={(e) => { e.preventDefault(); goHome("contact"); }}>Contact the studio</a>
-              </div>
-            </article>
-          </div>
-          <p className="biz-note">More businesses will be added here as cards as they are launched. No other businesses are listed yet — this page will grow as a card for each one.</p>
+          <p>Alpha Interior is the interior arm of First Engineering — a complete interior solution covering design, planning, furniture and execution for your home, office, showroom, restaurant or other commercial space.</p>
+          <p className="bn" style={{fontWeight: '600', color: 'var(--wood-dark)'}}>আপনার ভাবনাকে বাস্তব রূপ দিতে শুরু হোক আজই। <span style={{color: 'var(--muted)', fontWeight: '500'}}>— Start today to give your idea real form.</span></p>
+          <ul className="checklist">
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"><path d="M20 6 9 17l-5-5"/></svg> One point of contact, start to finish</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Furniture planned with the room, not after it</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Site visits and supervised execution</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Homes and businesses, across Bangladesh</li>
+          </ul>
         </div>
       </section>
+
+      <section id="alpha-services">
+        <div className="wrap">
+          <div className="sec-head">
+            <p className="kicker">What Alpha does</p>
+            <h2>Design, planning, furniture and execution — in one place</h2>
+          </div>
+          <div className="svc-grid">
+            <article className="svc">
+              <h3>Interior Design</h3>
+              <p>Complete interiors for flats and houses — living rooms, bedrooms and kitchens designed around your family and your daily life — as well as offices, showrooms and restaurants.</p>
+              <ul><li>Living &amp; dining spaces</li><li>Bedrooms &amp; kitchens</li><li>Full-flat interior packages</li></ul>
+            </article>
+            <article className="svc">
+              <h3>Planning</h3>
+              <p>We prepare the design and layout plan for your rooms — how the space is divided, where everything goes, and how it will look and feel.</p>
+              <ul><li>Space planning &amp; layouts</li><li>Workstations &amp; cabins</li><li>Meeting &amp; reception areas</li></ul>
+            </article>
+            <article className="svc">
+              <h3>Custom Furniture</h3>
+              <p>Through Alpha Interior and Furniture, furniture is designed and made for your exact plan — furniture planned with the room, not after it.</p>
+              <ul><li>Custom furniture by Alpha Interior</li><li>Furniture matched with finishes and materials</li></ul>
+            </article>
+            <article className="svc">
+              <h3>Fit-out &amp; Execution</h3>
+              <p>Our team executes the work on site under supervision, finishing the details and handing over a space that&apos;s ready to use.</p>
+              <ul><li>Fit-out &amp; finishing work</li><li>On-site supervision</li><li>Execution &amp; handover</li></ul>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="alpha-spaces">
+        <div className="wrap">
+          <div className="sec-head">
+            <p className="kicker">Spaces Alpha designs</p>
+            <h2>Rooms that work as good as they look</h2>
+            <p>The photos are style examples of the spaces we design.</p>
+          </div>
+          <div className="gal">
+            <figure>
+              <img src="/images/image-03.png" alt="Apartment living room with grey sofa, marble flooring and wood-panelled walls" loading="lazy" />
+              <figcaption><b>Living Room</b><span>Home interior · style example</span></figcaption>
+            </figure>
+            <figure>
+              <img src="/images/image-04.jpg" alt="Bedroom interior with a statement ceiling light, marble feature wall and vanity" loading="lazy" />
+              <figcaption><b>Master Bedroom</b><span>Home interior · style example</span></figcaption>
+            </figure>
+            <figure>
+              <img src="/images/image-05.jpg" alt="Bright modern kitchen with a central island and pendant lights" loading="lazy" />
+              <figcaption><b>Kitchen</b><span>Home interior · style example</span></figcaption>
+            </figure>
+            <figure>
+              <img src="/images/image-06.jpg" alt="Open-plan office with wooden desks, exposed ceiling and stone feature walls" loading="lazy" />
+              <figcaption><b>Open-Plan Office</b><span>Office interior · style example</span></figcaption>
+            </figure>
+            <figure>
+              <img src="/images/image-08.jpg" alt="Warmly lit restaurant interior with wooden tables, pendant lamps and a long counter" loading="lazy" />
+              <figcaption><b>Restaurant Dining</b><span>Commercial interior · style example</span></figcaption>
+            </figure>
+            <figure>
+              <img src="/images/image-10.webp" alt="Bright retail showroom interior with display shelving and a seating area" loading="lazy" />
+              <figcaption><b>Retail Showroom</b><span>Commercial interior · style example</span></figcaption>
+            </figure>
+          </div>
+          <p className="gal-note">Photos above are style examples of the spaces we design. See the studio&apos;s own projects, site visits and finished rooms on <a href="https://www.facebook.com/people/Alpha-Interior/100088429072640/" target="_blank" rel="noopener" style={{fontWeight: '800', color: 'var(--blue)'}}>Facebook — Alpha Interior</a>.</p>
+        </div>
+      </section>
+
+      <section id="alpha-process">
+        <div className="wrap">
+          <div className="sec-head">
+            <p className="kicker">How it works</p>
+            <h2>From your idea to a finished space, in four steps</h2>
+          </div>
+          <div className="process-grid">
+            <div className="step"><div className="num">01</div><h3>Talk &amp; site visit</h3><p>Call or message us with your space and what you need. We discuss your requirements and visit the site to measure and understand it.</p></div>
+            <div className="step"><div className="num">02</div><h3>Design &amp; planning</h3><p>We prepare the design and layout plan for your rooms — how the space is divided, where everything goes, and how it will look and feel.</p></div>
+            <div className="step"><div className="num">03</div><h3>Furniture &amp; materials</h3><p>Alpha Interior and Furniture builds the pieces your plan calls for, matched with the finishes and materials chosen in the design.</p></div>
+            <div className="step"><div className="num">04</div><h3>Execution &amp; handover</h3><p>Our team executes the work on site under supervision, finishing the details and handing over a space that&apos;s ready to use.</p></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="alpha-contact">
+        <div className="wrap">
+          <div className="sec-head">
+            <p className="kicker">Contact Alpha</p>
+            <h2>Let&apos;s talk about your space</h2>
+            <p>One call is enough to start. Tell us whether it&apos;s a home, an office, a showroom or a restaurant — and what you&apos;d like it to become.</p>
+          </div>
+          <p>Call us — always open: <a href="tel:+8801673630006" style={{fontWeight: '800', color: 'var(--blue)'}}>+880 1673-630006</a></p>
+          <p>Email: <a href="mailto:fastengineering08@gmail.com" style={{fontWeight: '800', color: 'var(--blue)'}}>fastengineering08@gmail.com</a></p>
+          <p>Studio: <b>House 29, Flat F1, Katasur</b>, Mohammadpur, Dhaka-1207, Bangladesh</p>
+          <div className="biz-card-links">
+            <a className="btn btn-blue btn-sm" href="https://www.facebook.com/people/Alpha-Interior/100088429072640/" target="_blank" rel="noopener">Facebook — Alpha Interior</a>
+            <a className="btn btn-ghost btn-sm" href="tel:+8801673630006">Call 01673-630006</a>
+            <a className="btn btn-ghost btn-sm" href="#contact" onClick={(e) => { e.preventDefault(); goHome("contact"); }}>Request a consultation</a>
+          </div>
+          <div className="biz-card-links" style={{marginTop: '12px'}}>
+            <a className="btn btn-ghost btn-sm" href="#top" onClick={(e) => { e.preventDefault(); goHome(); }}>← Back to First Engineering home</a>
+          </div>
+        </div>
+      </section>
+      </>
       ) : (
       <>
 
@@ -516,7 +559,7 @@ export default function App() {
       <div className="wrap foot-in">
         <span>© 2026 First Engineering Architecture &amp; Interior Solutions · Alpha Interior — a concern of First Engineering</span>
         <span style={{display: 'flex', gap: '22px', flexWrap: 'wrap'}}>
-          <a href="#businesses" onClick={(e) => { e.preventDefault(); goBusinesses("all"); }}>Businesses</a>
+          <a href="#alpha" onClick={(e) => { e.preventDefault(); goAlpha(); }}>Businesses</a>
           <a href="https://www.facebook.com/firstengineeringsolutions" target="_blank" rel="noopener">Facebook</a>
           <a href="tel:+8801673630006">+880 1673-630006</a>
           <a href="mailto:fastengineering08@gmail.com">Email us</a>
