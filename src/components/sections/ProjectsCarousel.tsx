@@ -11,10 +11,9 @@ import { contact, galleryItems } from "../../data/site";
  * its main headline and conversion actions.
  *
  * Slides reuse the existing gallery items verbatim (title + caption).
- * No project names, clients, locations, dates, or prices are claimed:
- * every caption already says "style example", and the hero carries its
- * own visible style-example pill. Replace galleryItems entries with
- * real project photos when they are supplied.
+ * No project names, clients, locations, dates, or prices are claimed.
+ * Replace galleryItems entries with real project photos when they are
+ * supplied.
  *
  * Auto-advance behaviour (documented): advances every 5 seconds.
  * There is NO Pause/Resume button, as requested. Auto-advance is
@@ -144,7 +143,6 @@ export default function ProjectsCarousel() {
         <div className="projects-carousel-bottom">
           <div className="wrap projects-carousel-bottom-in">
             <div className="projects-carousel-caption">
-              <span className="projects-carousel-note">Photos are style examples — real project photos will replace these.</span>
               <b>{current.title}</b>
               <span>{current.caption}</span>
             </div>
