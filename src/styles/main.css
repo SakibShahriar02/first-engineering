@@ -239,25 +239,54 @@ footer a:hover{text-decoration:underline}
 @media(max-width:520px){.alpha-page .alpha-craft-grid{grid-template-columns:1fr}}
 .alpha-page .alpha-contact{background:var(--wood-soft);border-top:1px solid var(--line)}
 
-/* ---------- Home project showcase carousel (projects-carousel only) ---------- */
-.projects-carousel-section{background:var(--bg2);border-block:1px solid var(--line)}
-.projects-carousel-note{display:inline-block;background:var(--wood-soft);border:1px solid var(--wood);color:var(--ink);font-weight:800;font-size:14px;padding:11px 16px;border-radius:12px}
+/* ---------- Home hero carousel (projects-carousel only) ---------- */
+/* Full-bleed hero: the image is the hero background — no boxed card,
+   no section background/border, no rounded frame. The static headline
+   overlay sits over a left-to-right dark gradient for readability. */
+.projects-carousel-section{position:relative;overflow:hidden}
 .projects-carousel{position:relative;outline:none}
-.projects-carousel-viewport{position:relative;border-radius:22px;overflow:hidden;box-shadow:var(--shadow);border:1px solid var(--line);background:var(--surface2)}
-.projects-carousel-image{display:block;width:100%;aspect-ratio:16/9;object-fit:cover}
-@media(max-width:640px){.projects-carousel-image{aspect-ratio:4/3}}
-.projects-carousel-caption{position:absolute;inset:auto 0 0 0;padding:44px 22px 18px;background:linear-gradient(transparent,rgba(10,17,20,.85));color:#fff}
+.projects-carousel-viewport{position:relative;overflow:hidden;background:var(--surface2)}
+.projects-carousel-image{display:block;width:100%;height:clamp(600px,78vh,720px);object-fit:cover}
+.projects-carousel-hero-scrim{position:absolute;inset:0;background:linear-gradient(to right,rgba(10,17,20,.82) 0%,rgba(10,17,20,.58) 46%,rgba(10,17,20,.18) 76%,rgba(10,17,20,0) 100%),linear-gradient(transparent 55%,rgba(10,17,20,.88))}
+/* Static hero overlay (top-left). Does not change with the slides. */
+.projects-carousel-hero-overlay{position:absolute;inset:0 0 auto 0;padding-top:clamp(56px,9vh,96px);color:#fff;z-index:2;pointer-events:none}
+.projects-carousel-hero-overlay .wrap{pointer-events:auto}
+.projects-carousel-hero-kicker{font-weight:800;font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:#a8d4f0;margin:0 0 14px}
+.projects-carousel-hero-overlay h1{font-family:'Archivo',sans-serif;font-size:clamp(38px,5.4vw,62px);font-weight:900;line-height:1.08;letter-spacing:-.02em;max-width:15em;color:#fff}
+.projects-carousel-hero-accent{color:#eab56d}
+.projects-carousel-hero-bn{font-size:clamp(19px,2.4vw,25px);font-weight:600;color:rgba(255,255,255,.92);margin:12px 0 0}
+.projects-carousel-hero-cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:26px}
+.projects-carousel-hero-cta .btn-outline-w:hover{border-color:#fff;background:rgba(255,255,255,.12)}
+/* Bottom block: caption + dots/counter, overlaid on the image. */
+.projects-carousel-bottom{position:absolute;inset:auto 0 0 0;z-index:2;padding-bottom:20px}
+.projects-carousel-bottom-in{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;flex-wrap:wrap}
+.projects-carousel-caption{color:#fff;max-width:38em}
+.projects-carousel-note{display:inline-block;background:rgba(10,17,20,.55);border:1px solid rgba(255,255,255,.35);color:#fff;font-weight:800;font-size:13px;padding:8px 13px;border-radius:999px;margin-bottom:10px}
 .projects-carousel-caption b{font-family:'Archivo';font-size:clamp(20px,2.6vw,28px);display:block}
 .projects-carousel-caption span{display:block;font-size:14px;color:#c8d6db;font-weight:600;margin-top:4px}
-.projects-carousel-arrow{position:absolute;top:50%;transform:translateY(-50%);width:48px;height:48px;border-radius:50%;border:1px solid rgba(255,255,255,.5);background:var(--blue);color:#fff;font-size:30px;line-height:1;cursor:pointer;box-shadow:var(--shadow-sm);z-index:2}
+.projects-carousel-caption .projects-carousel-note{color:#fff}
+/* Side arrows, anchored above the bottom block (not vertically centred),
+   so they never cover the static hero headline or CTAs on small screens. */
+.projects-carousel-arrow{position:absolute;bottom:148px;width:48px;height:48px;border-radius:50%;border:1px solid rgba(255,255,255,.5);background:var(--blue);color:#fff;font-size:30px;line-height:1;cursor:pointer;box-shadow:var(--shadow-sm);z-index:3}
 .projects-carousel-arrow:hover{background:var(--blue-dark)}
 .projects-carousel-arrow-prev{left:16px}
 .projects-carousel-arrow-next{right:16px}
-@media(max-width:560px){.projects-carousel-arrow{width:44px;height:44px}.projects-carousel-arrow-prev{left:10px}.projects-carousel-arrow-next{right:10px}}
-.projects-carousel-controls{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-top:18px}
-.projects-carousel-pause{border:1.5px solid var(--line2);background:var(--surface);color:var(--ink2);font-family:'Manrope';font-weight:800;font-size:14px;padding:9px 18px;border-radius:999px;cursor:pointer}
-.projects-carousel-pause:hover{border-color:var(--wood);color:var(--wood-dark)}
+.projects-carousel-controls{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
 .projects-carousel-dots{display:flex;gap:9px;flex-wrap:wrap;justify-content:center}
-.projects-carousel-dot{width:12px;height:12px;padding:0;border-radius:50%;border:2px solid var(--blue);background:transparent;cursor:pointer}
-.projects-carousel-dot[aria-current="true"]{background:var(--wood);border-color:var(--wood-dark);transform:scale(1.25)}
-.projects-carousel-counter{font-family:'Archivo';font-weight:800;font-size:15px;color:var(--blue);min-width:64px;text-align:right}
+.projects-carousel-dot{width:12px;height:12px;padding:0;border-radius:50%;border:2px solid rgba(255,255,255,.75);background:transparent;cursor:pointer}
+.projects-carousel-dot[aria-current="true"]{background:var(--wood);border-color:var(--wood);transform:scale(1.25)}
+.projects-carousel-counter{font-family:'Archivo';font-weight:800;font-size:15px;color:#fff;min-width:64px;text-align:right}
+@media(max-width:900px){
+  .projects-carousel-image{height:clamp(560px,72vh,640px)}
+  .projects-carousel-hero-overlay{padding-top:48px}
+  .projects-carousel-hero-overlay h1{max-width:12em}
+  .projects-carousel-arrow{bottom:140px}
+}
+@media(max-width:560px){
+  .projects-carousel-image{height:640px}
+  .projects-carousel-arrow{width:44px;height:44px;bottom:200px}
+  .projects-carousel-arrow-prev{left:10px}
+  .projects-carousel-arrow-next{right:10px}
+  .projects-carousel-hero-cta .btn{padding:12px 18px;font-size:14px}
+  .projects-carousel-bottom-in{gap:14px}
+}

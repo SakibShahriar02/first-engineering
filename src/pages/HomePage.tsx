@@ -1,4 +1,3 @@
-import Hero from "../components/sections/Hero";
 import Strip from "../components/sections/Strip";
 import ProjectsCarousel from "../components/sections/ProjectsCarousel";
 import About from "../components/sections/About";
@@ -11,9 +10,8 @@ import Contact from "../components/sections/Contact";
 export default function HomePage() {
   return (
     <>
-      <Hero />
-      <Strip />
       <ProjectsCarousel />
+      <Strip />
       <About />
       <Services />
       <Gallery />
