@@ -129,7 +129,7 @@ export default function ProjectsCarousel() {
           aria-label="Previous project"
           onClick={goPrev}
         >
-          ‹
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6" /></svg>
         </button>
         <button
           type="button"
@@ -137,7 +137,7 @@ export default function ProjectsCarousel() {
           aria-label="Next project"
           onClick={goNext}
         >
-          ›
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M9 18l6-6-6-6" /></svg>
         </button>
 
         <div className="projects-carousel-bottom">

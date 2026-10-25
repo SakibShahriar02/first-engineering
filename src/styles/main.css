@@ -265,8 +265,10 @@ footer a:hover{text-decoration:underline}
 .projects-carousel-caption span{display:block;font-size:14px;color:#c8d6db;font-weight:600;margin-top:4px}
 /* Side arrows, anchored above the bottom block (not vertically centred),
    so they never cover the static hero headline or CTAs on small screens. */
-.projects-carousel-arrow{position:absolute;bottom:148px;width:48px;height:48px;border-radius:50%;border:1px solid rgba(255,255,255,.5);background:var(--blue);color:#fff;font-size:30px;line-height:1;cursor:pointer;box-shadow:var(--shadow-sm);z-index:3}
-.projects-carousel-arrow:hover{background:var(--blue-dark)}
+.projects-carousel-arrow{position:absolute;bottom:148px;width:48px;height:48px;padding:0;border:none;background:transparent;color:#fff;cursor:pointer;z-index:3;filter:drop-shadow(0 2px 8px rgba(0,0,0,.65));transition:opacity .2s,transform .2s}
+.projects-carousel-arrow svg{display:block;width:100%;height:100%}
+.projects-carousel-arrow:hover{opacity:.75;transform:scale(1.12)}
+.projects-carousel-arrow:focus-visible{outline:2px solid #fff;outline-offset:4px;border-radius:8px}
 .projects-carousel-arrow-prev{left:16px}
 .projects-carousel-arrow-next{right:16px}
 .projects-carousel-controls{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
